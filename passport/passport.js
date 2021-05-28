@@ -20,9 +20,8 @@ passport.use(
     (accessToken, refreshToken, profile, done) => {
       console.log(profile);
       const user = {
-        userName: profile.displayName,
-        email: profile.emails[0],
-        picture: profile.photos[0]
+        _id: profile.id, 
+        userName: profile.displayName
       }
       return done(null, user);
     }
@@ -75,12 +74,11 @@ passport.use(
 );
 
 passport.serializeUser(function (user, done) {
-  done(null, user._id);
+  done(null, user);
 });
 
-passport.deserializeUser(async function (id, done) {
+passport.deserializeUser(async function (user, done) {
   try {
-    const user = await User.findById(id);
     done(null, user);
   } catch (err) {
     throw err;
