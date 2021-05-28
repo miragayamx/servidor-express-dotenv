@@ -4,15 +4,35 @@ const login = async (req, res) => {
 	try {
 		const lista = await Producto.find().lean();
 		if (!lista.length) throw Error();
-		res.render('login', { user: req.user ? req.user.username : null, lista: lista, existe: true });
+		res.render('login', { user: req.user ? req.user.userName : null, lista: lista, existe: true });
 	} catch (err) {
-		res.render('login', { user: req.user ? req.user.username : null, lista: [], existe: false });
+		res.render('login', { user: req.user ? req.user.userName : null, lista: [], existe: false });
+	}
+};
+
+const facebookLogin = async (req, res) => {
+	try {
+		const lista = await Producto.find().lean();
+		if (!lista.length) throw Error();
+		res.render('login', { user: req.user ? req.user.userName : null, lista: lista, existe: true });
+	} catch (err) {
+		res.render('login', { user: req.user ? req.user.userName : null, lista: [], existe: false });
 	}
 };
 
 const logout = (req, res) => {
 	try {
 		const userName = req.user ? req.user.username : null;
+		if (!userName) return res.redirect('/login');
+		req.logout();
+		res.status(200).render('logout', { user: userName });
+	} catch (err) {
+		res.status(404).json({ error: err.message });
+	}
+};
+const facebookLogout = (req, res) => {
+	try {
+		const userName = req.user ? req.user.userName : null;
 		if (!userName) return res.redirect('/login');
 		req.logout();
 		res.status(200).render('logout', { user: userName });
@@ -45,8 +65,10 @@ const failSingUp = (req, res) => {
 
 module.exports = {
 	login,
+	facebookLogin,
 	postLogin,
 	logout,
+	facebookLogout,
 	failLogin,
 	signUp,
 	registerUser,

@@ -8,25 +8,14 @@ router
   .route("/login")
   .get(loginController.login)
   .post(
-    passport.authenticate("login", { failureRedirect: "/faillogin" }),
-    loginController.postLogin
+    passport.authenticate("facebook"), loginController.facebookLogin
   );
 router.get("/faillogin", loginController.failLogin);
 
-router
-  .route("/signup")
-  .get(loginController.signUp)
-  .post(
-    passport.authenticate("signup", { failureRedirect: "/failsignup" }),
-    loginController.registerUser
-  );
-router.get("/failsignup", loginController.failSingUp);
+router.get("/logout", loginController.facebookLogout);
 
-router.get("/logout", loginController.logout);
-
-router.get("/facebook", passport.authenticate("facebook"));
 router.get(
-  "/facebook/callback",
+  "/login/callback",
   passport.authenticate("facebook", {
     successRedirect: "/login",
     failureRedirect: "/faillogin",

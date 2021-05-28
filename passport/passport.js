@@ -15,11 +15,15 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
-      callbackURL: "/facebook/callback",
+      callbackURL: "/login/callback",
     },
     (accessToken, refreshToken, profile, done) => {
       console.log(profile);
-      const user = profile;
+      const user = {
+        userName: profile.displayName,
+        email: profile.emails[0],
+        picture: profile.photos[0]
+      }
       return done(null, user);
     }
   )
