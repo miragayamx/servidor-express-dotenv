@@ -11,6 +11,7 @@ const productRouter = require('./routes/productRouter');
 const vistaRouter = require('./routes/vistaRouter');
 const loginRouter = require('./routes/loginRouter');
 const infoRouter = require('./routes/infoRouter');
+const randomsRouter = require('./routes/randomsRouter');
 const Producto = require('./models/producto');
 const Mensaje = require('./models/mensaje');
 const { createUploadsFolder, createDBLiteFolder, readFile, saveFile, appendFile } = require('./utils/fileManager');
@@ -55,6 +56,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 app.use('/', loginRouter);
 app.use('/', infoRouter);
+app.use('/', randomsRouter);
 app.use('/api', productRouter);
 app.use('/productos', vistaRouter);
 
