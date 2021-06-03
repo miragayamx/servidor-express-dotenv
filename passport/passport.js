@@ -9,16 +9,23 @@ const isCredencialesOk = (user, password) =>
 const createHashPaswword = (password) =>
   bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
 
+let FACEBOOK_CLIENT_ID = process.env.FACEBOOK_APP_ID;
+let FACEBOOK_CLIENT_SECRET = process.env.FACEBOOK_APP_SECRET;
+
+process.argv.forEach((value, index)=> {
+  if(value.includes('FACEBOOK_CLIENT_ID=')) FACEBOOK_CLIENT_ID = value.split('=')[1];
+  if(value.includes('FACEBOOK_CLIENT_SECRET=')) FACEBOOK_CLIENT_SECRET = value.split('=')[1];
+});
+
 passport.use(
   "facebook",
   new FacebookStrategy(
     {
-      clientID: process.env.FACEBOOK_APP_ID,
-      clientSecret: process.env.FACEBOOK_APP_SECRET,
+      clientID: FACEBOOK_CLIENT_ID,
+      clientSecret: FACEBOOK_CLIENT_SECRET,
       callbackURL: "/login/callback",
     },
     (accessToken, refreshToken, profile, done) => {
-      console.log(profile);
       const user = {
         _id: profile.id, 
         userName: profile.displayName

@@ -10,6 +10,7 @@ const handlebars = require('express-handlebars');
 const productRouter = require('./routes/productRouter');
 const vistaRouter = require('./routes/vistaRouter');
 const loginRouter = require('./routes/loginRouter');
+const infoRouter = require('./routes/infoRouter');
 const Producto = require('./models/producto');
 const Mensaje = require('./models/mensaje');
 const { createUploadsFolder, createDBLiteFolder, readFile, saveFile, appendFile } = require('./utils/fileManager');
@@ -53,6 +54,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/public')));
 
 app.use('/', loginRouter);
+app.use('/', infoRouter);
 app.use('/api', productRouter);
 app.use('/productos', vistaRouter);
 
@@ -103,6 +105,7 @@ const server = http.listen(PORT, async () => {
 	try {
 		console.log(`El servidor esta corriendo en el puerto: ${server.address().port}`);
 		await createUploadsFolder();
+		console.log(`Id del proceso: ${process.pid}`);
 	} catch (err) {
 		console.log(err);
 	}
