@@ -1,22 +1,24 @@
 const randomNumbers = (cant = 100000000) => {
   const randomArray = [];
   for (let i = 0; i < cant; i++) {
-    randomArray.push(Math.floor(Math.random() * (1 - 1001)) + 1);
+    randomArray.push(Math.floor(Math.random() * (1001 - 1)) + 1);
   }
   const keys = randomArray.filter(
     (el, index) => randomArray.indexOf(el) === index
   );
-  const randomObj = keys.reduce((acc, currentValue, index, array) => {
-    acc[currentValue] = randomArray.filter((el) => el === currentValue).length;
-  }, {});
+  const randomObj = {};
+  keys.forEach((key) => {
+    randomObj[key] = randomArray.filter((el) => el === key).length;
+  });
   return randomObj;
 };
 
-let cant = 100000000;
 process.on("message", (msg) => {
-  console.log(msg);
-  if (msg) cant = Number(msg);
+  if(!!msg){
+    const randoms = randomNumbers(Number(msg));
+    process.send(randoms);
+  } else {
+    const randoms = randomNumbers();
+    process.send(randoms);
+  }
 });
-
-const randoms = randomNumbers(cant);
-process.send(randoms);
