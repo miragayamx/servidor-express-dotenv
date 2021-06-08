@@ -4,9 +4,9 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"dev": "./node_modules/.bin/nodemon ./server.js",
+		"dev": "./node_modules/.bin/nodemon ./index.js",
 		"kill": "forever stopall",
-		"prod": "forever start server.js"
+		"prod": "forever start index.js"
 	},
 	"keywords": [],
 	"author": "",
