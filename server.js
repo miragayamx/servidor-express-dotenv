@@ -1,4 +1,6 @@
 const path = require('path');
+const cluster = require('cluster');
+const numCPUs = require('os').cpus().length;
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
@@ -103,14 +105,32 @@ io.on('connection', (socket) => {
 	});
 });
 
-const server = http.listen(PORT, async () => {
-	try {
-		console.log(`El servidor esta corriendo en el puerto: ${server.address().port}`);
-		await createUploadsFolder();
-		console.log(`Id del proceso: ${process.pid}`);
-	} catch (err) {
-		console.log(err);
-	}
+let clusterMode = false;
+
+process.argv.forEach((value, index) => {
+	if (value.includes('CLUSTER')) clusterMode = true;
 });
 
-server.on('error', (err) => console.log(`Error de servidor: ${err}`));
+if (clusterMode) {
+	if (cluster.isMaster) {
+		for (let i = 0; i < numCPUs; i++) {
+			cluster.fork();
+		}
+
+		cluster.on('exit', (worker, code, signal) => {
+			console.log(`Worker ${worker.process.pid} died`);
+		});
+	} else {
+		const server = http.listen(PORT, async () => {
+			try {
+				console.log(`El servidor esta corriendo en el puerto: ${server.address().port}`);
+				await createUploadsFolder();
+				console.log(`Id del proceso: ${process.pid}`);
+			} catch (err) {
+				console.log(err);
+			}
+		});
+
+		server.on('error', (err) => console.log(`Error de servidor: ${err}`));
+	}
+}
