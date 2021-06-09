@@ -19,7 +19,7 @@ if (clusterMode) {
 		});
 	} else {
         console.log('Running server cluster!!!')
-		fServerOn();
+		fServerOn(8082);
 	}
 } else {
 	const serverOn = fork('childServer.js');
