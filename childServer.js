@@ -1,6 +1,7 @@
 const fServerOn = require('./fServerOn');
+const logger = require('./winstonConfig');
 
 process.on('message', (msg) => {
-    console.log(msg)
-    fServerOn(8081);
+	logger.info(msg);
+	fServerOn(8081);
 });

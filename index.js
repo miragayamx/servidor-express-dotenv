@@ -2,6 +2,7 @@ const cluster = require('cluster');
 const { fork } = require('child_process');
 const numCPUs = require('os').cpus().length;
 const fServerOn = require('./fServerOn');
+const logger = require('./winstonConfig');
 
 let clusterMode = false;
 
@@ -15,10 +16,10 @@ if (clusterMode) {
 			cluster.fork();
 		}
 		cluster.on('exit', (worker, code, signal) => {
-			console.log(`Worker ${worker.process.pid} died`);
+			logger.info(`Worker ${worker.process.pid} died`);
 		});
 	} else {
-        console.log('Running server cluster!!!')
+		logger.info('Running server cluster!!!')
 		fServerOn(8082);
 	}
 } else {
