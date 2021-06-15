@@ -2,8 +2,8 @@ const fs = require('fs');
 const logger = require('../winstonConfig');
 
 exports.createUploadsFolder = () => {
-	fs.promises.mkdir('./public/uploads').then(() => console.log('Directorio uploads creado!')).catch((err) => {
-		if (err.code === 'EEXIST') return console.log('Directorio uploads creado!');
+	fs.promises.mkdir('./public/uploads').then(() => logger.info('Directorio uploads creado!')).catch((err) => {
+		if (err.code === 'EEXIST') return logger.info('Directorio uploads creado!');
 		logger.info(err);
 		logger.error(err);
 	});
