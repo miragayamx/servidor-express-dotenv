@@ -8,12 +8,14 @@
 		"server1": "pm2 start index.js --name=Server1 --watch",
 		"server2": "pm2 start index.js --name=Server2 --watch -i max -- CLUSTER",
 		"stopall": "pm2 stop all",
-		"deleteall": "pm2 delete all"
+		"deleteall": "pm2 delete all",
+		"grafico": "0x index.js"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"autocannon": "^7.3.0",
 		"bcrypt": "^5.0.1",
 		"compression": "^1.7.4",
 		"connect-mongo": "^4.4.1",
