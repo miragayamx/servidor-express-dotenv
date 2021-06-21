@@ -9,7 +9,7 @@
 		"server2": "pm2 start index.js --name=Server2 --watch -i max -- CLUSTER",
 		"stopall": "pm2 stop all",
 		"deleteall": "pm2 delete all",
-		"grafico": "0x index.js"
+		"grafico": "0x ./index.js"
 	},
 	"keywords": [],
 	"author": "",
