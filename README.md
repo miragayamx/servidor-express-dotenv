@@ -1,17 +1,19 @@
-# LOGGERS Y GZIP
+# ANÁLISIS COMPLETO DE PERFORMANCE
 
 >> Consigna:
 
-Incorporar al proyecto de servidor de trabajo la compresión gzip.
+Ejercicio 1:
 
-Verificar sobre la ruta /info con y sin compresión, la diferencia de cantidad de bytes devueltos en un caso y otro.
+Armar un endpoint (por ejemplo /info) que devuelva el archivo generado por artillery.
+Si no existe, devolver el comando de artillery necesario para generarlo.
 
-Utilizar como registro de la aplicación de backend eligiendo el logger que más les guste: log4js, winston o pino log4js.
 
-Elegir un módulo del servidor para reemplazar los console.log por las funciones de logger, seleccionando el detalle de log entre 3 niveles: info, warning y error utilizando el siguiente criterio:
+if(fileExtist("testDeCarga.txt")) {
+    res.sendFile("archivoGenerado.txt");
+} else{
+    res.status(200).json({ message: "Debe correr el siguiente comando para generar el archivo: 
+        artillery quick --count 10 -n 50 "http://localhost:5000/getAllUsers" > testDeCarga.txt
+    "})
+}
 
-● Loggear todos los niveles a consola (info, warning y error)
-
-● Registrar sólo los logs de warning a un archivo llamada warn.log
-
-● Enviar sólo los logs de error a un archivo llamada error.log
+Ejercicos 2 y 3 son capturas de pantalla de la terminal habiendo corrido las librerias (opcional);
