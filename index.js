@@ -1,6 +1,7 @@
 const cluster = require('cluster');
 const { fork } = require('child_process');
-const numCPUs = require('os').cpus().length;
+//const numCPUs = require('os').cpus().length;
+const numCPUs = process.env.WEB_CONCURRENCY;
 const fServerOn = require('./fServerOn');
 const logger = require('./winstonConfig');
 

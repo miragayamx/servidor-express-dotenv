@@ -1,19 +1,14 @@
-# ANÁLISIS COMPLETO DE PERFORMANCE
+# IMPLEMENTAR NUESTRO PROYECTO EN HEROKU
 
 >> Consigna:
 
-Ejercicio 1:
+Crear un proyecto en Heroku.com para subir el servidor que venimos realizando, reformando todo lo necesario para su correcto funcionamiento en la nube.
+Subir el código a Heroku.com, sin olvidar incluir el archivo .gitignore para evitar subir los node_modules.
 
-Armar un endpoint (por ejemplo /info) que devuelva el archivo generado por artillery.
-Si no existe, devolver el comando de artillery necesario para generarlo.
+Comprobar que el proyecto inicie de manera correcta en la nube. Verificar que en su ruta raíz se encuentre la página pública del servidor.
 
+El servidor debe seguir funcionando en forma local.
 
-if(fileExtist("testDeCarga.txt")) {
-    res.sendFile("archivoGenerado.txt");
-} else{
-    res.status(200).json({ message: "Debe correr el siguiente comando para generar el archivo: 
-        artillery quick --count 10 -n 50 "http://localhost:5000/getAllUsers" > testDeCarga.txt
-    "})
-}
+Realizar un cambio a elección en alguna vista, probar en forma local y subir nuevamente el proyecto a Heroku, verificando que la nueva reforma esté disponible online.
 
-Ejercicos 2 y 3 son capturas de pantalla de la terminal habiendo corrido las librerias (opcional);
+Revisar a través de una consola local, los mensajes enviados por nuestro servidor en Heroku a su propia consola.
