@@ -5,11 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"dev": "./node_modules/.bin/nodemon ./index.js",
-		"server1": "pm2 start index.js --name=Server1 --watch",
-		"server2": "pm2 start index.js --name=Server2 --watch -i max -- CLUSTER",
-		"stopall": "pm2 stop all",
-		"deleteall": "pm2 delete all",
-		"grafico": "0x ./index.js"
+		"start": "node index.js"
 	},
 	"keywords": [],
 	"author": "",
