@@ -1,7 +1,9 @@
 const fServerOn = require('./fServerOn');
 const logger = require('./winstonConfig');
 
+const PORT = process.env.PORT || 8080;
+
 process.on('message', (msg) => {
 	logger.info(msg);
-	fServerOn(8081);
+	fServerOn(PORT);
 });

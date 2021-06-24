@@ -5,6 +5,7 @@ const fServerOn = require('./fServerOn');
 const logger = require('./winstonConfig');
 
 let clusterMode = false;
+const PORT = process.env.PORT || 8080;
 
 process.argv.forEach((value, index) => {
 	if (value.includes('CLUSTER')) clusterMode = true;
@@ -20,7 +21,7 @@ if (clusterMode) {
 		});
 	} else {
 		logger.info('Running server cluster!!!')
-		fServerOn(8082);
+		fServerOn(PORT);
 	}
 } else {
 	const serverOn = fork('childServer.js');
