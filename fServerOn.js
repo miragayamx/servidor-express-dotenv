@@ -25,7 +25,7 @@ require('./passport/passport');
 app.use(
 	session({
 		store: MongoStore.create({
-			mongoUrl: process.env.MONGODB_URL_LOCAL,
+			mongoUrl: process.env.MONGODB_URL,
 			mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true }
 		}),
 		secret: 'secreto',
@@ -110,7 +110,6 @@ const fServerOn = (PORT) => {
 	const server = http.listen(PORT, async () => {
 		try {
 			logger.info(`El servidor esta corriendo en el puerto: ${server.address().port}`);
-			logger.info(process.env.MONGODB_URI);
 			await createUploadsFolder();
 			logger.info(`Id del proceso: ${process.pid}`);
 		} catch (err) {
