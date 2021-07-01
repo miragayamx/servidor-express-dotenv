@@ -6,9 +6,9 @@ const router = express.Router();
 
 router
   .route("/login")
-  .get(loginController.login)
+  .get(loginController.facebookLogin)
   .post(
-    passport.authenticate("facebook"), loginController.facebookLogin
+    passport.authenticate("facebook")
   );
 router.get("/faillogin", loginController.failLogin);
 

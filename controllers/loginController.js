@@ -23,9 +23,17 @@ const facebookLogin = async (req, res) => {
 				html: '<p>Log In</p>'
 			});
 		}
-		res.render('login', { user: req.user ? req.user.userName : null, lista: lista, existe: true });
+		res.render('facebookLogin', { user: req.user ? req.user.userName : null, lista: lista, existe: true });
 	} catch (err) {
-		res.render('login', { user: req.user ? req.user.userName : null, lista: [], existe: false });
+		if (req.user) {
+			sendEmail({
+				form: 'Servidor Node',
+				to: 'darrel.romaguera@ethereal.email',
+				subject: `Log In user: ${req.user.userName}`,
+				html: '<p>Log In</p>'
+			});
+		}
+		res.render('facebookLogin', { user: req.user ? req.user.userName : null, lista: [], existe: false });
 	}
 };
 
