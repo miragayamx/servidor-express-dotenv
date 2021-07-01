@@ -1,4 +1,5 @@
 const Producto = require('../models/producto');
+const sendEmail = require('../services/nodemailer');
 
 const login = async (req, res) => {
 	try {
@@ -14,6 +15,14 @@ const facebookLogin = async (req, res) => {
 	try {
 		const lista = await Producto.find().lean();
 		if (!lista.length) throw Error();
+		if (req.user) {
+			sendEmail({
+				form: 'Servidor Node',
+				to: 'darrel.romaguera@ethereal.email',
+				subject: `Log In user: ${req.user.userName}`,
+				html: '<p>Log In</p>'
+			});
+		}
 		res.render('login', { user: req.user ? req.user.userName : null, lista: lista, existe: true });
 	} catch (err) {
 		res.render('login', { user: req.user ? req.user.userName : null, lista: [], existe: false });
@@ -35,6 +44,12 @@ const facebookLogout = (req, res) => {
 		const userName = req.user ? req.user.userName : null;
 		if (!userName) return res.redirect('/login');
 		req.logout();
+		sendEmail({
+			form: 'Servidor Node',
+			to: 'darrel.romaguera@ethereal.email',
+			subject: `Log Out user: ${userName}`,
+			html: '<p>Log Out</p>'
+		});
 		res.status(200).render('logout', { user: userName });
 	} catch (err) {
 		res.status(404).json({ error: err.message });

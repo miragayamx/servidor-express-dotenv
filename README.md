@@ -1,14 +1,15 @@
-# IMPLEMENTAR NUESTRO PROYECTO EN HEROKU
+# ENVIAR MAILS Y SMS DESDE NUESTRA APP
 
 >> Consigna:
 
-Crear un proyecto en Heroku.com para subir el servidor que venimos realizando, reformando todo lo necesario para su correcto funcionamiento en la nube.
-Subir el código a Heroku.com, sin olvidar incluir el archivo .gitignore para evitar subir los node_modules.
+Realizar los siguientes cambios sobre el proyecto en el que venimos trabajando:
 
-Comprobar que el proyecto inicie de manera correcta en la nube. Verificar que en su ruta raíz se encuentre la página pública del servidor.
+● El sistema debe enviar un mail, utilizando una cuenta de ethereal, que indique cuando un usuario se loguea (a través de la red social implementada anteriormente: de aquí en más Facebook). Así mismo debe proceder de la misma forma al desloguerse el usuario.
 
-El servidor debe seguir funcionando en forma local.
+● En ambos casos, el asunto del mail debe describir la operación (log in, log out) y el nombre del usuario junto a la fecha y hora del evento.
 
-Realizar un cambio a elección en alguna vista, probar en forma local y subir nuevamente el proyecto a Heroku, verificando que la nueva reforma esté disponible online.
+● Además, al momento del logueo se debe enviar un email similar, utilizando gmail como servidor de correo, a la cuenta de email registrada en Facebook ó alguna otra elegida. Se debe adjuntar la foto de perfil de la red social Facebook en el envío.
 
-Revisar a través de una consola local, los mensajes enviados por nuestro servidor en Heroku a su propia consola.
+● El servidor también enviará un SMS a un número elegido, cada vez que reciba un mensaje con la palabra 'administrador' en el canal de chat, indicando quién lo envió y el texto completo del mensaje.
+
+● En todos los casos revisar las distintas casillas de email verificando que los mails lleguen con los datos pedidos. También debe llegar de manera apropiada el SMS al celular indicado, revisar la consola de Twilio para validar el mensaje.

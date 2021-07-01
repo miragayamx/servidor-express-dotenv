@@ -18,6 +18,7 @@ const artilleryRouter = require('./routes/artilleryRouter');
 const Producto = require('./models/producto');
 const Mensaje = require('./models/mensaje');
 const { createUploadsFolder, createDBLiteFolder, readFile, saveFile, appendFile } = require('./utils/fileManager');
+const sendSMS = require('./services/twilio');
 require('dotenv').config();
 require('./db/mongoose');
 require('./passport/passport');
@@ -100,6 +101,8 @@ const fServerOn = (PORT) => {
 				const newMessage = new Mensaje(messageWithDate);
 				await newMessage.save();
 				messages.push(messageWithDate);
+				if (message.message.includes('administrador'))
+					sendSMS({ message: `email: ${message.email} mensaje: ${message.message}`, phone: '+541151111242' });
 				io.emit('messages', messages);
 			} catch (err) {
 				io.emit('chatInfo', { error: 'No fue posible recuperar los mensajes' });
