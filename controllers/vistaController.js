@@ -42,8 +42,13 @@ const productosVistaTest = (req, res) => {
 	}
 };
 
+const registrarGraphql = (req, res) => {
+	res.render('ingreso-productos-graphql');
+}
+
 module.exports = {
 	productosVista,
 	productosRegistrar,
-	productosVistaTest
+	productosVistaTest,
+	registrarGraphql
 };

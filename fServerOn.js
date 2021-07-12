@@ -9,6 +9,9 @@ const MongoStore = require('connect-mongo');
 const passport = require('passport');
 const logger = require('./winstonConfig');
 const handlebars = require('express-handlebars');
+const { graphqlHTTP } = require('express-graphql');
+const upload = require('./middleware/multer');
+const graphqlController = require('./graphql/graphqlController');
 const productRouter = require('./routes/productRouter');
 const vistaRouter = require('./routes/vistaRouter');
 const loginRouter = require('./routes/loginRouter');
@@ -63,6 +66,31 @@ app.use('/', randomsRouter);
 app.use('/', artilleryRouter);
 app.use('/api', productRouter);
 app.use('/productos', vistaRouter);
+
+const imagePathCapture = (req, res, next) => {
+	if (req.file) {
+		const { title, price } = req.body;
+		req.body.variables = {
+			input: {
+				title: title,
+				price: Number(price),
+				thumbnail: '/uploads/' + req.file.filename
+			}
+		};
+	}
+	next();
+};
+
+app.use(
+	'/graphql',
+	upload.single('thumbnail'),
+	imagePathCapture,
+	graphqlHTTP({
+		schema: graphqlController.schema,
+		rootValue: graphqlController.root,
+		graphiql: true
+	})
+);
 
 const fServerOn = (PORT) => {
 	//SOCKET

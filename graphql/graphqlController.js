@@ -1,35 +1,41 @@
 const { buildSchema } = require("graphql");
 const Producto = require("../models/producto");
+const logger = require("../winstonConfig");
 
 const schema = buildSchema(`
+    type Query {
+      productos: [Producto!]
+    }
     type Producto {
-        id: String!,
+        _id: String!,
         title: String!,
-        price: float!,
+        price: Float!,
         thumbnail: String!
     }
     input AddProductoInput {
         title: String!,
-        price: float!,
+        price: Float!,
         thumbnail: String!
     }
     type Mutation {
-        addProducto(data: AddProductoInput) : Producto!
+        addProducto(input: AddProductoInput!) : Producto!
     }
 `);
 
 const root = {
-  addProducto: (args) => {
+  addProducto: async(args) => {
     try {
+      const { title, price, thumbnail } = args.input;
       const newProducto = new Producto({
-        title: args.title,
-        price: args.price,
-        thumbnail: args.thumbnail,
+        title: title,
+        price: price,
+        thumbnail: thumbnail,
       });
       await newProducto.save();
       return newProducto;
     } catch (err) {
-      console.log(err);
+      logger.info(err);
+      logger.error(err);
     }
   },
 };
