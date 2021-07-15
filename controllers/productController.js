@@ -21,6 +21,7 @@ const getProduct = async (req, res) => {
 //POST
 const createProduct = async (req, res) => {
 	try {
+		console.log(req.body)
 		const newProducto = new Producto({
 			title: req.body.title,
 			price: req.body.price,
