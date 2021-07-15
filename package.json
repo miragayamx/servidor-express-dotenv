@@ -6,7 +6,8 @@
 	"scripts": {
 		"dev": "./node_modules/.bin/nodemon ./index.js",
 		"start": "node index.js",
-		"axiosTest": "node ./test/axiosTest.js"
+		"axiosTest": "node ./test/axiosTest.js",
+		"test": "mocha ./test/test.js"
 	},
 	"keywords": [],
 	"author": "",
