@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import logger from '../winstonConfig';
+import logger from '../winstonConfig.js';
 
 const productoSchema = new mongoose.Schema({
 	title: {
@@ -38,7 +38,7 @@ class MongoPersist {
 	}
 	getProductos = async () => {
 		try {
-			return await Producto.find({}).lean();
+			return await Producto.find().lean();
 		} catch (err) {
 			throw err;
 		}

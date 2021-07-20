@@ -1,12 +1,12 @@
-const Producto = require('../models/producto');
+import { getProductoById } from '../negocio/productos.js';
 
 const productExists = async (req, res, next) => {
 	try {
-		await Producto.findById(req.params.id);
+		await getProductoById(req.params.id);
 		next();
 	} catch (err) {
 		res.status(400).json({ error: 'producto no encontrado' });
 	}
 };
 
-module.exports = productExists;
+export default productExists;

@@ -1,5 +1,5 @@
-import model from '../model/productos';
-import PrimeraConexion from './singleton';
+import model from '../model/productos.js';
+import PrimeraConexion from './singleton.js';
 
 export const getProductos = async () => {
 	return await model.getProductos();

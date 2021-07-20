@@ -1,4 +1,5 @@
-const winston = require('winston')
+//import winston from 'winston/lib/winston/config';
+import winston from 'winston';
 
 const logger = winston.createLogger({
     level: 'warn',
@@ -9,4 +10,4 @@ const logger = winston.createLogger({
     ]
 })
 
-module.exports = logger;
+export default logger;

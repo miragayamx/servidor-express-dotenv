@@ -1,26 +1,15 @@
-const Producto = require('../models/producto');
+import * as negocio from "../negocio/productos.js";
 
-const productosVista = async (req, res) => {
-	try {
-		const lista = await Producto.find().lean();
-		if (!lista.length) throw Error();
-		res.render('productos-vista', { lista: lista, existe: true });
-	} catch (err) {
-		res.render('productos-vista', { lista: [], existe: false });
-	}
+export const productosVista = async (req, res) => {
+  try {
+    const lista = await negocio.getProductos();
+    if (!lista.length) throw Error();
+    res.render("productos-vista", { lista: lista, existe: true });
+  } catch (err) {
+    res.render("productos-vista", { lista: [], existe: false });
+  }
 };
 
-const productosRegistrar = async (req, res) => {
-	try {
-		const lista = await Producto.find().lean();
-		if (!lista.length) throw Error();
-		res.render('ingreso-producto', { lista: lista, existe: true });
-	} catch (err) {
-		res.render('ingreso-producto', { lista: [], existe: false });
-	}
-};
-
-module.exports = {
-	productosVista,
-	productosRegistrar,
+export const productosRegistrar = (req, res) => {
+  res.render("ingreso-producto");
 };

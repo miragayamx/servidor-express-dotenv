@@ -1,7 +1,6 @@
 import memoryPersist from './memoryPersist.js';
 import fileSystemPersist from './fileSystemPersist.js';
 import mongoPersist from './mongoPersist.js';
-import SqlPersist from './sqlPersist.js';
 import logger from '../winstonConfig.js';
 
 /* -------------------------------------- */
@@ -17,8 +16,6 @@ class FactoryProductoModel {
 				return new fileSystemPersist();
 			case 'Mongo':
 				return new mongoPersist();
-            case 'Sql':
-				return new SqlPersist();
 		}
 	}
 }

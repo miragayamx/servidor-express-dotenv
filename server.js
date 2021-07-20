@@ -1,13 +1,17 @@
+import path from 'path';
 import express from 'express';
 import handlebars from 'express-handlebars';
-import logger from './winstonConfig';
-import productRouter from './routes/productRouter';
-import { createUploadsFolder} from './utils/fileManager';
+import logger from './winstonConfig.js';
+import productRouter from './routes/productRouter.js';
+import vistaRouter from './routes/vistaRouter.js';
+import { createUploadsFolder} from './utils/fileManager.js';
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+
+const __dirname = path.resolve();
 
 app.engine(
 	'hbs',
