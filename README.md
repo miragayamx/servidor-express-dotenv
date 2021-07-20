@@ -1,11 +1,11 @@
-# TESTEAMOS NUESTRA API REST
+# MEJORAR LA ARQUITECTURA DE NUESTRA API
 
 >> Consigna:
 
-● Realizar un test de la funcionalidad hacia la API Rest de productos (testeada con postman), esta vez creando las pruebas a través un cliente de pruebas que utilice Axios para leer productos disponibles, incorporar nuevos productos, modificar y borrar.
+Separar en capas el proyecto que venimos realizando, exponiendo la capa de ruteo, el controlador, la lógica de negocio con los casos de uso y la capa de persistencia.
 
-● Realizar el cliente en un módulo independiente y desde el código generar los requests correspondientes, revisando los resultados desde la base de datos y en la respuesta del servidor obtenida en el cliente HTTP.
+Crear una factory que permita elegir con qué sistema de almacenamiento voy a trabajar (MongoDB, MySQL, File, Memory, etc), tomando la opción de la línea de comandos.
 
-● Luego, realizar las mismas pruebas, a través de un código de test apropiado, que utilice mocha, chai y Supertest, para probar cada uno de los métodos HTTP de la API Rest de productos.
+Cada uno de estos casos de persistencia, deberán ser implementados usando el patrón singleton que impida crear nuevas instancias de estos mecanismos de acceso a los datos.
 
-● Escribir una suite de test para verificar si las respuestas a la lectura, incorporación, modificación y borrado de productos son las apropiadas. Generar un reporte con los resultados obtenidos de la salida del test.
+Comprobar que si llamo a la factory dos veces, con una misma opción elegida, devuelva la misma instancia.
