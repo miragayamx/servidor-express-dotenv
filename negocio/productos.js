@@ -1,5 +1,4 @@
 import model from '../model/productos.js';
-import PrimeraConexion from './singleton.js';
 
 export const getProductos = async () => {
 	return await model.getProductos();
@@ -19,8 +18,4 @@ export const updateProducto = async (id, item) => {
 
 export const deleteProducto = async (id) => {
 	return await model.deleteProducto(id);
-};
-
-export const obtenerHora = () => {
-	return new PrimeraConexion().obtenerHora();
 };
