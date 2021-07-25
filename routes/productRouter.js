@@ -1,7 +1,7 @@
-import express from 'express';
-import * as productControler from '../controllers/productController.js';
-import upload from '../middleware/multer.js';
-import productExists from '../middleware/productExists.js';
+const express = require('express');
+const productControler = require('../controllers/productController');
+const upload = require('../middleware/multer');
+const productExists = require('../middleware/productExists');
 
 const router = express.Router();
 
@@ -15,4 +15,4 @@ router.put('/productos/actualizar/:id', productExists, upload.single('thumbnail'
 //DELETE
 router.delete('/productos/borrar/:id', productExists, productControler.deleteProduct);
 
-export default router;
+module.exports = router;

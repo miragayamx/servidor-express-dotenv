@@ -1,9 +1,9 @@
-import express from 'express';
-import * as vistaController from '../controllers/vistaController.js';
+const express = require('express');
+const vistaController = require('../controllers/vistaController');
 
 const router = express.Router();
 
 router.get('/vista', vistaController.productosVista);
 router.get('/registrar', vistaController.productosRegistrar);
 
-export default router;
+module.exports = router;

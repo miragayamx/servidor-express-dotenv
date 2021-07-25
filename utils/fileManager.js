@@ -1,7 +1,7 @@
-import fs from 'fs';
-import logger from '../winstonConfig.js';
+const fs = require('fs');
+const logger = require('../winstonConfig');
 
-export const createUploadsFolder = () => {
+exports.createUploadsFolder = () => {
 	fs.promises.mkdir('./public/uploads').then(() => logger.info('Directorio uploads creado!')).catch((err) => {
 		if (err.code === 'EEXIST') return logger.info('Directorio uploads creado!');
 		logger.info(err);
@@ -9,7 +9,7 @@ export const createUploadsFolder = () => {
 	});
 };
 
-export const createFolder = async (path) => {
+exports.createFolder = async (path) => {
 	fs.promises.mkdir(path).then(() => 'Directorio creado con exito!').catch((err) => {
 		if (err.code === 'EEXIST') return;
 		logger.info(err);
@@ -17,7 +17,7 @@ export const createFolder = async (path) => {
 	});
 };
 
-export const readFile = async (file) => {
+exports.readFile = async (file) => {
 	try {
 		return await fs.promises.readFile(file, 'utf-8');
 	} catch (err) {
@@ -25,7 +25,7 @@ export const readFile = async (file) => {
 	}
 };
 
-export const saveFile = async (file, data) => {
+exports.saveFile = async (file, data) => {
 	try {
 		await fs.promises.writeFile(file, data);
 	} catch (err) {
@@ -33,7 +33,7 @@ export const saveFile = async (file, data) => {
 	}
 };
 
-export const appendFile = async (file, data = '') => {
+exports.appendFile = async (file, data = '') => {
 	try {
 		await fs.promises.appendFile(file, data);
 	} catch (err) {
@@ -41,7 +41,7 @@ export const appendFile = async (file, data = '') => {
 	}
 };
 
-export const deleteFile = async (file) => {
+exports.deleteFile = async (file) => {
 	try {
 		await fs.promises.unlink(file);
 	} catch (err) {

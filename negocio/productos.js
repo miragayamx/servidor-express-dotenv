@@ -1,21 +1,29 @@
-import model from '../model/productos.js';
+const model = require('../model/productos');
 
-export const getProductos = async () => {
+const getProductos = async () => {
 	return await model.getProductos();
 };
 
-export const getProductoById = async (id) => {
+const getProductoById = async (id) => {
 	return await model.getProductoById(id);
 };
 
-export const addProducto = async (item) => {
+const addProducto = async (item) => {
 	await model.addProducto(item);
 };
 
-export const updateProducto = async (id, item) => {
+const updateProducto = async (id, item) => {
 	await model.updateProducto(id, item);
 };
 
-export const deleteProducto = async (id) => {
+const deleteProducto = async (id) => {
 	return await model.deleteProducto(id);
+};
+
+module.exports = {
+	getProductos,
+	getProductoById,
+	addProducto,
+	updateProducto,
+	deleteProducto
 };

@@ -1,4 +1,4 @@
-import { getProductoById } from '../negocio/productos.js';
+const { getProductoById } = require('../negocio/productos');
 
 const productExists = async (req, res, next) => {
 	try {
@@ -9,4 +9,4 @@ const productExists = async (req, res, next) => {
 	}
 };
 
-export default productExists;
+module.exports = productExists;

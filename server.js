@@ -1,17 +1,20 @@
-import path from 'path';
-import express from 'express';
-import handlebars from 'express-handlebars';
-import logger from './winstonConfig.js';
-import productRouter from './routes/productRouter.js';
-import vistaRouter from './routes/vistaRouter.js';
-import { createUploadsFolder} from './utils/fileManager.js';
+const path = require('path');
+const express = require('express');
+const handlebars = require('express-handlebars');
+const yargs = require('yargs/yargs');
+const { hideBin } = require('yargs/helpers')
+const logger = require('./winstonConfig');
+const productRouter = require('./routes/productRouter');
+const vistaRouter = require('./routes/vistaRouter');
+const { createUploadsFolder } = require('./utils/fileManager');
+const env = require('./config');
+
+const argv = yargs(hideBin(process.argv)).argv
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
-
-const __dirname = path.resolve();
 
 app.engine(
 	'hbs',
@@ -28,11 +31,11 @@ app.set('views', './views');
 app.use('/', vistaRouter);
 app.use('/api', productRouter);
 
-const PORT = process.env.PORT || 8080;
+const PORT = argv.port || env.PORT;
 
 const server = app.listen(PORT, async () => {
 	logger.info(`El servidor esta corriendo en el puerto: ${server.address().port}`);
-    await createUploadsFolder();
+	await createUploadsFolder();
 });
 
 server.on('error', (err) => {

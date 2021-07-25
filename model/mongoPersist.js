@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'
-import logger from '../winstonConfig.js';
+const mongoose = require('mongoose');
+const logger = require('../winstonConfig');
 
 const productoSchema = new mongoose.Schema({
 	title: {
@@ -74,4 +74,4 @@ class MongoPersist {
 	};
 }
 
-export default MongoPersist;
+module.exports = MongoPersist;

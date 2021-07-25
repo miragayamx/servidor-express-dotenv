@@ -1,8 +1,7 @@
-import memoryPersist from './memoryPersist.js';
-import fileSystemPersist from './fileSystemPersist.js';
-import mongoPersist from './mongoPersist.js';
-import SqlPersist from './sqlPersist.js';
-import logger from '../winstonConfig.js';
+const memoryPersist = require('./memoryPersist');
+const mongoPersist = require('./mongoPersist');
+const logger = require('../winstonConfig');
+const env = require('../config');
 
 /* -------------------------------------- */
 /*                FACTORY                 */
@@ -13,16 +12,12 @@ class FactoryProductoModel {
 		switch (opcion) {
 			case 'Mem':
 				return new memoryPersist();
-			case 'File':
-				return new fileSystemPersist();
 			case 'Mongo':
 				return new mongoPersist();
-            case 'Sql':
-				return new SqlPersist();
 		}
 	}
 }
 
-const opcion = process.argv[2] || 'Mem';
+const opcion = env.PERSIST;
 
-export default FactoryProductoModel.set(opcion);
+module.exports = FactoryProductoModel.set(opcion);

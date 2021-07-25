@@ -50,4 +50,4 @@ class MemoryPersist {
   };
 }
 
-export default MemoryPersist;
+module.exports = MemoryPersist;
